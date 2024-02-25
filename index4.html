@@ -12,8 +12,6 @@
                 let figure = document.createElement("figure");
                 figure.setAttribute("class", "elements");
                 figure.onmousedown = function (event) {
-                    dragX = event.pageX - event.offsetX;
-                    dragY = event.pageY - event.offsetY;
                     let c = figure.cloneNode(true);
                     c.style.position = 'absolute';
                     document.body.append(c);
@@ -37,10 +35,8 @@
                         var omd = function (event) {
                             c.onmousedown = null;
                             console.log('down2');
-                            dragX = event.pageX - event.offsetX;
-                            dragY = event.pageY - event.offsetY;
-                            offsetX = event.offsetX;
-                            offsetY = event.offsetY;
+                            offsetX = event.pageX - c.getBoundingClientRect().left;
+                            offsetY = event.pageY - c.getBoundingClientRect().top;
                             console.log(offsetX, offsetY);
                             function moveAt2(pageX, pageY) {
                                 c.style.left = ((pageX - offsetX) / 20).toFixed() * 20 + 'px';
