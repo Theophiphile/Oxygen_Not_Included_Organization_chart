@@ -5,6 +5,8 @@
     <script src="img.js"></script>
     <script src="db.js"></script>
     <script>
+        let DbList;
+
         function lookInDb(key) {
             var ret = [];
             if ('High' in db.elements[key]) {
@@ -22,19 +24,39 @@
                 }
             }
             console.log([...new Set(ret)]);
+            while (DbList.firstChild) {
+                DbList.firstChild.remove();
+            }
+            for (const e of [...new Set(ret)]) {
+                elem = document.getElementById(e).cloneNode(true);
+                elem.removeAttribute('id');
+                DbList.insertAdjacentElement("afterbegin", elem);
+            }
         }
 
         window.addEventListener('load', function () {
             let elementsList = document.createElement('div');
-            elementsList.setAttribute("style", "width: 132px; height: 500px; overflow: auto")
+            elementsList.id = "ElementsList";
+            DbList = document.createElement('div');
+            elementsList.style.width = '132px';
+            elementsList.style.height = '500px';
+            elementsList.style.overflow = 'auto';
+            DbList.style.width = '132px';
+            DbList.style.height = '500px';
+            DbList.style.overflow = 'auto';
+            DbList.style.position = 'absolute';
+            DbList.style.left = window.innerWidth - 140 + 'px';
+            DbList.style.top = 0;
             for (const [key, value] of Object.entries(db.elements)) {
                 let figure = document.createElement("figure");
                 figure.className = "elements";
                 figure.id = key;
+                figure.setAttribute("element", key);
                 figure.onmousedown = function (event) {
-                    lookInDb(figure.id);
                     let c = figure.cloneNode(true);
+                    c.removeAttribute('id');
                     c.style.position = 'absolute';
+                    lookInDb(c.getAttribute("element"));
                     document.body.append(c);
                     offsetX = event.pageX - figure.getBoundingClientRect().left;
                     offsetY = event.pageY - figure.getBoundingClientRect().top;
@@ -52,7 +74,7 @@
                         document.removeEventListener('mousemove', onMouseMove);
                         document.onmouseup = null;
                         var omd = function (event) {
-                            lookInDb(c.id);
+                            lookInDb(c.getAttribute("element"));
                             c.onmousedown = null;
                             offsetX = event.pageX - c.getBoundingClientRect().left;
                             offsetY = event.pageY - c.getBoundingClientRect().top;
@@ -95,6 +117,7 @@
                 elementsList.appendChild(figure);
             }
             document.body.appendChild(elementsList);
+            document.body.appendChild(DbList);
 
         });
     </script>
