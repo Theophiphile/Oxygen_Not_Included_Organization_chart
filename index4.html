@@ -1,0 +1,85 @@
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" rel="noopener" target="_blank" href="style.css">
+    <script src="img.js"></script>
+    <script src="db.js"></script>
+    <script>
+        window.addEventListener('load', function () {
+            let elementsList = document.createElement('div');
+            elementsList.setAttribute("style", "width: 132px; height: 500px; overflow: auto")
+            for (const [key, value] of Object.entries(db.elements)) {
+                let figure = document.createElement("figure");
+                figure.setAttribute("class", "elements");
+                figure.onmousedown = function (event) {
+                    dragX = event.pageX - event.offsetX;
+                    dragY = event.pageY - event.offsetY;
+                    let c = figure.cloneNode(true);
+                    c.style.position = 'absolute';
+                    document.body.append(c);
+                    offsetX = event.offsetX;
+                    offsetY = event.offsetY;
+                    console.log('down1');
+                    function moveAt(pageX, pageY) {
+                        c.style.left = ((pageX - offsetX) / 20).toFixed() * 20 + 'px';
+                        c.style.top = ((pageY - offsetY) / 20).toFixed() * 20 + 'px';
+                    }
+                    moveAt(event.pageX, event.pageY);
+
+                    function onMouseMove(event) {
+                        moveAt(event.pageX, event.pageY);
+                    }
+                    document.addEventListener('mousemove', onMouseMove);
+                    document.onmouseup = function () {
+                        console.log('up1');        
+                        document.removeEventListener('mousemove', onMouseMove);
+                        document.onmouseup = null;
+                        var omd = function (event) {
+                            c.onmousedown = null;
+                            console.log('down2');
+                            dragX = event.pageX - event.offsetX;
+                            dragY = event.pageY - event.offsetY;
+                            offsetX = event.offsetX;
+                            offsetY = event.offsetY;
+                            console.log(offsetX, offsetY);
+                            function moveAt2(pageX, pageY) {
+                                c.style.left = ((pageX - offsetX) / 20).toFixed() * 20 + 'px';
+                                c.style.top = ((pageY - offsetY) / 20).toFixed() * 20 + 'px';
+                            }
+                            moveAt2(event.pageX, event.pageY);
+
+                            omm = function onMouseMove2(event) {
+                                moveAt2(event.pageX, event.pageY);
+                            }
+                            document.addEventListener('mousemove', omm);
+                            document.onmouseup = function () {
+                                console.log('up2');        
+
+                                document.removeEventListener('mousemove', omm);
+                                document.onmouseup = null;
+                                c.onmousedown = omd;
+                            };
+                        }
+                        c.onmousedown = omd;
+                    };
+                }
+                let image = document.createElement('img');
+                console.log(img.elements);
+                image.setAttribute('src', 'images/elements/' + img.elements[key] + '.png');
+                image.draggable = false;
+                let caption = document.createElement("figcaption");
+                caption.insertAdjacentHTML('afterbegin', key);
+                figure.appendChild(image);
+                figure.appendChild(caption);
+                console.log(figure);
+                elementsList.appendChild(figure);
+            }
+            document.body.appendChild(elementsList);
+
+        });
+    </script>
+</head>
+
+<body></body>
+
+</html>
