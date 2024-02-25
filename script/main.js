@@ -21,9 +21,10 @@ function lookInDb(key) {
         DbList.firstChild.remove();
     }
     for (const e of [...new Set(ret)]) {
-        elem = document.getElementById(e).cloneNode(true);
+        let elem = document.getElementById(e).cloneNode(true);
         elem.removeAttribute('id');
-        DbList.insertAdjacentElement("afterbegin", elem);
+        elem.onmousedown = event => onmousedownForElementsList(elem, event, false);
+        DbList.insertAdjacentElement("beforeend", elem);
     }
 }
 
@@ -32,10 +33,12 @@ function onMouseMoveSnapGrid(c, offsetX, offsetY, event) {
     c.style.top = ((event.pageY - offsetY) / 20).toFixed() * 20 + 'px';
 }
 
-function onmousedownGeneric(c, event) {
+function onmousedownGeneric(c, event, lookdb = true) {
     offsetX = event.pageX - c.getBoundingClientRect().left;
     offsetY = event.pageY - c.getBoundingClientRect().top;
-    lookInDb(c.getAttribute("element"));
+    if (lookdb) {
+        lookInDb(c.getAttribute("element"));
+    }
     omm = event => onMouseMoveSnapGrid(c, offsetX, offsetY, event);
     omm(event);
     document.addEventListener('mousemove', omm);
@@ -47,7 +50,8 @@ function onmousedownGeneric(c, event) {
         }
     };
 }
-function onmousedownForElementsList(figure, event) {
+
+function onmousedownForElementsList(figure, event, lookdb = true) {
     let c = figure.cloneNode(true);
     c.removeAttribute('id');
     c.style.position = 'absolute';
@@ -56,22 +60,15 @@ function onmousedownForElementsList(figure, event) {
     offsetX = event.pageX - figure.getBoundingClientRect().left;
     offsetY = event.pageY - figure.getBoundingClientRect().top;
     onMouseMoveSnapGrid(c, offsetX, offsetY, event);
-    onmousedownGeneric(c, event);
+    onmousedownGeneric(c, event, lookdb);
 }
 
-window.addEventListener('load', function () {
+function initElementsList() {
     let elementsList = document.createElement('div');
     elementsList.id = "ElementsList";
-    DbList = document.createElement('div');
     elementsList.style.width = '132px';
     elementsList.style.height = '500px';
     elementsList.style.overflow = 'auto';
-    DbList.style.width = '132px';
-    DbList.style.height = '500px';
-    DbList.style.overflow = 'auto';
-    DbList.style.position = 'absolute';
-    DbList.style.left = window.innerWidth - 140 + 'px';
-    DbList.style.top = 0;
     for (const [key, value] of Object.entries(db.elements)) {
         let figure = document.createElement("figure");
         figure.className = "elements";
@@ -90,6 +87,16 @@ window.addEventListener('load', function () {
         elementsList.appendChild(figure);
     }
     document.body.appendChild(elementsList);
-    document.body.appendChild(DbList);
+}
 
+window.addEventListener('load', function () {
+    initElementsList();
+    DbList = document.createElement('div');
+    DbList.style.width = '132px';
+    DbList.style.height = '500px';
+    DbList.style.overflow = 'auto';
+    DbList.style.position = 'absolute';
+    DbList.style.left = window.innerWidth - 140 + 'px';
+    DbList.style.top = 0;
+    document.body.appendChild(DbList);
 });
