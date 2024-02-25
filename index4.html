@@ -5,19 +5,43 @@
     <script src="img.js"></script>
     <script src="db.js"></script>
     <script>
+        function lookInDb(key) {
+            var ret = [];
+            console.log(key, db.elements[key])
+            if ('High' in db.elements[key]) {
+                ret.push(...Object.keys(db.elements[key].High.elements));
+            }
+            if ('Low' in db.elements[key]) {
+                ret.push(...Object.keys(db.elements[key].Low.elements));
+            }
+            for (const [k, v] of Object.entries(db.elements)) {
+//                if (k != key) {
+                    if ('High' in v && key in v.High.elements) {
+                        ret.push(k);
+                    }
+                    if ('Low' in v && key in v.Low.elements) {
+                        ret.push(k);
+                    }
+                }
+  //          }
+            console.log([...new Set(ret)]);
+        }
+
         window.addEventListener('load', function () {
             let elementsList = document.createElement('div');
             elementsList.setAttribute("style", "width: 132px; height: 500px; overflow: auto")
             for (const [key, value] of Object.entries(db.elements)) {
                 let figure = document.createElement("figure");
-                figure.setAttribute("class", "elements");
+                figure.className = "elements";
+                figure.id = key;
                 figure.onmousedown = function (event) {
+                    lookInDb(figure.id);
                     let c = figure.cloneNode(true);
                     c.style.position = 'absolute';
                     document.body.append(c);
-                    offsetX = event.offsetX;
-                    offsetY = event.offsetY;
-                    console.log('down1');
+                    offsetX = event.pageX - figure.getBoundingClientRect().left;
+                    offsetY = event.pageY - figure.getBoundingClientRect().top;
+                    console.log(offsetX, offsetY);
                     function moveAt(pageX, pageY) {
                         c.style.left = ((pageX - offsetX) / 20).toFixed() * 20 + 'px';
                         c.style.top = ((pageY - offsetY) / 20).toFixed() * 20 + 'px';
@@ -29,10 +53,11 @@
                     }
                     document.addEventListener('mousemove', onMouseMove);
                     document.onmouseup = function () {
-                        console.log('up1');        
+                        console.log('up1');
                         document.removeEventListener('mousemove', onMouseMove);
                         document.onmouseup = null;
                         var omd = function (event) {
+                            lookInDb(c.id);
                             c.onmousedown = null;
                             console.log('down2');
                             offsetX = event.pageX - c.getBoundingClientRect().left;
@@ -49,7 +74,7 @@
                             }
                             document.addEventListener('mousemove', omm);
                             document.onmouseup = function () {
-                                console.log('up2');        
+                                console.log('up2');
 
                                 document.removeEventListener('mousemove', omm);
                                 document.onmouseup = null;
