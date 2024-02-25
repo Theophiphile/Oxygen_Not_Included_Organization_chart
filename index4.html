@@ -7,7 +7,6 @@
     <script>
         function lookInDb(key) {
             var ret = [];
-            console.log(key, db.elements[key])
             if ('High' in db.elements[key]) {
                 ret.push(...Object.keys(db.elements[key].High.elements));
             }
@@ -15,15 +14,13 @@
                 ret.push(...Object.keys(db.elements[key].Low.elements));
             }
             for (const [k, v] of Object.entries(db.elements)) {
-//                if (k != key) {
-                    if ('High' in v && key in v.High.elements) {
-                        ret.push(k);
-                    }
-                    if ('Low' in v && key in v.Low.elements) {
-                        ret.push(k);
-                    }
+                if ('High' in v && key in v.High.elements) {
+                    ret.push(k);
                 }
-  //          }
+                if ('Low' in v && key in v.Low.elements) {
+                    ret.push(k);
+                }
+            }
             console.log([...new Set(ret)]);
         }
 
@@ -47,41 +44,43 @@
                         c.style.top = ((pageY - offsetY) / 20).toFixed() * 20 + 'px';
                     }
                     moveAt(event.pageX, event.pageY);
-
                     function onMouseMove(event) {
                         moveAt(event.pageX, event.pageY);
                     }
                     document.addEventListener('mousemove', onMouseMove);
-                    document.onmouseup = function () {
-                        console.log('up1');
+                    document.onmouseup = function (event) {
                         document.removeEventListener('mousemove', onMouseMove);
                         document.onmouseup = null;
                         var omd = function (event) {
                             lookInDb(c.id);
                             c.onmousedown = null;
-                            console.log('down2');
                             offsetX = event.pageX - c.getBoundingClientRect().left;
                             offsetY = event.pageY - c.getBoundingClientRect().top;
                             console.log(offsetX, offsetY);
                             function moveAt2(pageX, pageY) {
                                 c.style.left = ((pageX - offsetX) / 20).toFixed() * 20 + 'px';
                                 c.style.top = ((pageY - offsetY) / 20).toFixed() * 20 + 'px';
+                                console.log((pageX - offsetX));
                             }
                             moveAt2(event.pageX, event.pageY);
-
                             omm = function onMouseMove2(event) {
                                 moveAt2(event.pageX, event.pageY);
                             }
                             document.addEventListener('mousemove', omm);
-                            document.onmouseup = function () {
-                                console.log('up2');
-
+                            document.onmouseup = function (event) {
                                 document.removeEventListener('mousemove', omm);
                                 document.onmouseup = null;
                                 c.onmousedown = omd;
+                                console.log((event.pageX - offsetX));
+                                if (((event.pageX - offsetX) / 20).toFixed() * 20 < 140) {
+                                    c.remove();
+                                }
                             };
                         }
                         c.onmousedown = omd;
+                        if (((event.pageX - offsetX) / 20).toFixed() * 20 < 140) {
+                                    c.remove();
+                                }
                     };
                 }
                 let image = document.createElement('img');
