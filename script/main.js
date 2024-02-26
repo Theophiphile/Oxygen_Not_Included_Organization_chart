@@ -110,7 +110,7 @@ function initOverlaysStartArrows() {
     }
     document.body.appendChild(svg);
     overlaysStartArrows = svg;
-
+    overlaysStartArrows.style.visibility = 'hidden';
 }
 
 function onMouseHoverStartArrows(c, event) {
@@ -167,6 +167,7 @@ function initElementsList() {
     elementsList.style.width = '137px';
     elementsList.style.height = '500px';
     elementsList.style.overflow = 'auto';
+    elementsList.style.float = 'left';
     for (const [key, value] of Object.entries(db.elements)) {
         let figure = document.createElement("figure");
         figure.className = "elements";
@@ -184,7 +185,7 @@ function initElementsList() {
         console.log(figure);
         elementsList.appendChild(figure);
     }
-    document.body.appendChild(elementsList);
+    document.getElementById('middle').appendChild(elementsList);
 }
 
 window.addEventListener('load', function () {
