@@ -8,20 +8,38 @@ body {
 }
 
 #leftchoices {
-    width: 60px;
+    width: 75px;
     height: 100%;
     float: left;
+
+    button {
+        margin-bottom: 5px;
+        margin-left: 5px;
+        margin-right: 5px;
+        font-size: 12px;
+        text-align: center;
+    }
+
     img {
-        border: 3px solid rgb(138, 137, 137);
-        border-radius: 20px;
-        display: block;
-        max-width:40px;
-        max-height:40px;
-        width: auto;
-        height: auto;
-    };
-    font-size: 12px;
+        margin-bottom: -5px;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
+    }
+
+    svg {
+
+
+        margin-bottom: -5px;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
+    }
+
 }
+
 .critters {
     border: 1px dashed black;
     background-color: #FFCC9948;
