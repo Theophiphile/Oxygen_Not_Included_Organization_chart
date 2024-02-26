@@ -1,25 +1,36 @@
-body {
+html, body {
     margin: 0;
     padding: 0;
     height: 100%;
     width: 100%;
 }
 
-#topbar {
-    width: 100%;
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+#topbar, #bottombar {
+    flex: 0 0 30px;
     background-color: chocolate;
 }
 
 #middle {
-    height: 100%;
+    display: flex;
+    flex-direction: row;
+    flex: 1 0 0px;
+    min-height: 0px; /* Me demande pas pourquoi */
 }
 
 #leftchoices {
-    width: 75px;
-    height: 100%;
-    float: left;
+    order: 0;
+    display: flex;
+    flex-direction: column;
     background-color: chocolate;
+    overflow: auto;
     button {
+        display: flex;
+        flex-direction: column;
         margin-top: 5px;
         margin-left: 5px;
         margin-right: 5px;
@@ -27,33 +38,30 @@ body {
         text-align: center;
     }
 
-    img {
-        margin-bottom: -5px;
-        border-radius: 50%;
+    img, svg {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
         width: 40px;
         height: 40px;
         object-fit: contain;
     }
-
-    svg {
-
-
-        margin-bottom: -5px;
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
-        object-fit: contain;
-    }
-
 }
 
 #ElementsList {
-    overflow-y: scroll;
-    float: left;
-    height: 700px;
+    order: 0;
+    overflow: auto;
     background-color: blueviolet;
     padding-right: 10px;
+    display: flex;
+    flex-direction: column;
 }
+
+#dessin {
+    order: 1;
+    flex: 1 0 auto;
+}
+
 
 .critters {
     border: 1px dashed black;
@@ -83,18 +91,20 @@ body {
     margin: 5px;
     width: 120px;
     height: 60px;
-    display: grid;
-    grid-template-columns: 50px 70px;
+    display: flex;
     align-items: center;
     font-size: 12px;
     color: black;
     font-family: Helvetica;
     text-align: center;
     user-select: none;
-
     img {
         width: 50px;
     }
+}
+
+.textElement {
+    flex: 1;
 }
 
 .others {
