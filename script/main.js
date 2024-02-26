@@ -1,6 +1,17 @@
 let DbList;
 
+function arrowClickButton() { 
+    let butt = document.getElementById('buttonArrow');
+    if (butt.style.backgroundColor == "") {
+        butt.style.backgroundColor = 'green';
+    }
+    else {
+        butt.style.backgroundColor = "";
+    }
+}
+
 function lookInDb(key) {
+    return;
     var ret = [];
     if ('High' in db.elements[key]) {
         ret.push(...Object.keys(db.elements[key].High.elements));

@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
     margin: 0;
     padding: 0;
     height: 100%;
@@ -10,7 +11,8 @@ body {
     flex-direction: column;
 }
 
-#topbar, #bottombar {
+#topbar,
+#bottombar {
     flex: 0 0 30px;
     background-color: chocolate;
 }
@@ -19,7 +21,8 @@ body {
     display: flex;
     flex-direction: row;
     flex: 1 0 0px;
-    min-height: 0px; /* Me demande pas pourquoi */
+    min-height: 0px;
+    /* Me demande pas pourquoi */
 }
 
 #leftchoices {
@@ -28,6 +31,7 @@ body {
     flex-direction: column;
     background-color: chocolate;
     overflow: auto;
+
     button {
         display: flex;
         flex-direction: column;
@@ -38,7 +42,8 @@ body {
         text-align: center;
     }
 
-    img, svg {
+    img,
+    svg {
         display: block;
         margin-left: auto;
         margin-right: auto;
@@ -62,6 +67,9 @@ body {
     flex: 1 0 auto;
 }
 
+#buttonArrow {
+    box-sizing: border-box;
+}
 
 .critters {
     border: 1px dashed black;
@@ -83,7 +91,7 @@ body {
     }
 }
 
-.elements {
+.elements4 {
     border: 1px solid black;
     box-sizing: border-box;
     background-color: white;
@@ -98,8 +106,31 @@ body {
     font-family: Helvetica;
     text-align: center;
     user-select: none;
+
     img {
         width: 50px;
+    }
+}
+
+.elements {
+    background-color: #cc7a23;
+    padding: 0px;
+    margin: 5px;
+    width: 120px;
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    color: black;
+    font-family: Helvetica;
+    text-align: center;
+    user-select: none;
+
+    img {
+        object-fit: contain;
+        width: 50px;
+        height: 50px;
+        background-color: #b46c20;
     }
 }
 
