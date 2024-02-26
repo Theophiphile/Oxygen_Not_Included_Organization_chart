@@ -28,99 +28,6 @@ function lookInDb(key) {
     }
 }
 
-let overlaysStartArrows;
-
-function initOverlaysStartArrows() {
-    let svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    svg.style.position = 'absolute';
-    svg.style.width = '120px';
-    svg.style.height = '60px';
-    for (value of [
-        [[0, 0], [15, 15], [15, 20], [0, 20]],
-        [[0, 40], [15, 40], [15, 45], [0, 60]],
-        [[24, 0], [48, 0], [48, 15], [24, 15]],
-        [[24, 60], [48, 60], [48, 45], [24, 45]],
-        [[72, 0], [96, 0], [96, 15], [72, 15]],
-        [[72, 60], [96, 60], [96, 45], [72, 45]],
-        [[120, 0], [105, 15], [105, 20], [120, 20]],
-        [[120, 40], [105, 40], [105, 45], [120, 60]]
-    ]) {
-        let poly = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
-        poly.style.fill = 'green';
-        poly.style.fillOpacity = 0.4;
-        svg.appendChild(poly);
-        for (v of value) {
-            let p = svg.createSVGPoint();
-            p.x = v[0];
-            p.y = v[1];
-            poly.points.appendItem(p);
-        }
-        poly.onmousedown = function (event) {
-            if (event.offsetX < 15 ||
-                event.offsetX > 105 ||
-                event.offsetY < 15 ||
-                event.offsetY > 45) {
-                event.stopPropagation();
-                return false;
-            };
-        }
-        poly.onmouseenter = function (event) {
-            poly.style.fill = 'blue';
-        }
-        poly.onmouseleave = function (event) {
-            poly.style.fill = 'green';
-        }
-    }
-    for (value of [
-        [[0, 0], [15, 15], [24, 15], [24, 0]],
-        [[48, 0], [72, 0], [72, 15], [48, 15]],
-        [[96, 0], [120, 0], [105, 15], [96, 15]],
-        [[0, 60], [15, 45], [24, 45], [24, 60]],
-        [[48, 60], [72, 60], [72, 45], [48, 45]],
-        [[96, 60], [120, 60], [105, 45], [96, 45]],
-        [[0, 20], [15, 20], [15, 40], [0, 40]],
-        [[120, 20], [105, 20], [105, 40], [120, 40]]
-    ]) {
-        let poly = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
-        poly.style.fill = 'green';
-        poly.style.fillOpacity = 0.6;
-        svg.appendChild(poly);
-        for (v of value) {
-            let p = svg.createSVGPoint();
-            p.x = v[0];
-            p.y = v[1];
-            poly.points.appendItem(p);
-        }
-        poly.onmousedown = function (event) {
-            if (event.offsetX < 15 ||
-                event.offsetX > 105 ||
-                event.offsetY < 15 ||
-                event.offsetY > 45) {
-                event.stopPropagation();
-                return false;
-            };
-        }
-        poly.onmouseenter = function (event) {
-            poly.style.fill = 'blue';
-        }
-        poly.onmouseleave = function (event) {
-            poly.style.fill = 'green';
-        }
-
-    }
-    document.body.appendChild(svg);
-    overlaysStartArrows = svg;
-    overlaysStartArrows.style.visibility = 'hidden';
-}
-
-function onMouseHoverStartArrows(c, event) {
-    c.appendChild(overlaysStartArrows);
-    overlaysStartArrows.style.visibility = 'visible';
-}
-
-function onMouseHoverLeaveStartArrows(c, event) {
-    overlaysStartArrows.style.visibility = 'hidden';
-}
 function onMouseMoveSnapGrid(c, offsetX, offsetY, event) {
     c.style.left = ((event.pageX - offsetX) / 20).toFixed() * 20 + 'px';
     c.style.top = ((event.pageY - offsetY) / 20).toFixed() * 20 + 'px';
@@ -139,9 +46,6 @@ function onmousedownGeneric(c, event, lookdb = true) {
     document.onmouseup = function (event) {
         document.removeEventListener('mousemove', omm);
         document.onmouseup = null;
-        c.onmouseenter = event => onMouseHoverStartArrows(c, event);
-        c.onmouseleave = event => onMouseHoverLeaveStartArrows(c, event);
-        onMouseHoverStartArrows(c, event);
         if (((event.pageX - offsetX) / 20).toFixed() * 20 < 140) {
             c.remove();
         }
@@ -149,6 +53,9 @@ function onmousedownGeneric(c, event, lookdb = true) {
 }
 
 function onmousedownForElementsList(figure, event, lookdb = true) {
+    if (event.button > 0) {
+        return;
+    }
     let c = figure.cloneNode(true);
     c.removeAttribute('id');
     c.style.position = 'absolute';
@@ -164,10 +71,7 @@ function onmousedownForElementsList(figure, event, lookdb = true) {
 function initElementsList() {
     let elementsList = document.createElement('div');
     elementsList.id = "ElementsList";
-    elementsList.style.width = '137px';
-    elementsList.style.height = '500px';
-    elementsList.style.overflow = 'auto';
-    elementsList.style.float = 'left';
+
     for (const [key, value] of Object.entries(db.elements)) {
         let figure = document.createElement("figure");
         figure.className = "elements";
@@ -193,8 +97,7 @@ window.addEventListener('load', function () {
     initOverlaysStartArrows();
     DbList = document.createElement('div');
     DbList.style.width = '137px';
-    DbList.style.height = '500px';
-    DbList.style.overflow = 'auto';
+    DbList.style.overflow = 'scroll';
     DbList.style.position = 'absolute';
     DbList.style.left = window.innerWidth - 140 + 'px';
     DbList.style.top = 0;

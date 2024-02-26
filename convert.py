@@ -1,7 +1,7 @@
 import xml.etree.ElementTree as ET
 tree = ET.parse('pouet.xml')
 root = tree.getroot()
-pouet = root.find(".//diagram[@name='Abyssalite+Wolframite+Tungsten+Insulation']")
+pouet = root.find(".//diagram[@name='Phosphorite+Phosphorus_G/L+Refined_Phosphorus']")
 
 with open('index3.html', 'w') as f:
     f.write('''<html><head>
