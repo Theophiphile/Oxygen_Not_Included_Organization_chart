@@ -14,7 +14,7 @@ body {
 #topbar,
 #bottombar {
     flex: 0 0 30px;
-    background-color: chocolate;
+    background-color: #121212d0;
 }
 
 #middle {
@@ -29,35 +29,28 @@ body {
     order: 0;
     display: flex;
     flex-direction: column;
-    background-color: chocolate;
+    background-color: #121212d0;
     overflow: auto;
 
-    button {
+    .leftMenuButton {
         display: flex;
         flex-direction: column;
-        margin-top: 5px;
-        margin-left: 5px;
-        margin-right: 5px;
-        font-size: 12px;
-        text-align: center;
-    }
-
-    img,
-    svg {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        width: 40px;
-        height: 40px;
-        object-fit: contain;
+        img,
+        svg {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+        }
     }
 }
 
 #ElementsList {
     order: 0;
     overflow: auto;
-    background-color: blueviolet;
-    padding-right: 10px;
+    background-color: #66553d;
     display: flex;
     flex-direction: column;
 }
@@ -113,9 +106,10 @@ body {
 }
 
 .elements {
-    background-color: #cc7a23;
+    background-color: #b2946b;
     padding: 0px;
     margin: 5px;
+    margin-bottom: 0px;
     width: 120px;
     min-height: 50px;
     display: flex;
@@ -125,12 +119,14 @@ body {
     font-family: Helvetica;
     text-align: center;
     user-select: none;
-
+    box-shadow: 1px 3px 3px rgba(0, 0, 0, 0.5);
     img {
         object-fit: contain;
-        width: 50px;
-        height: 50px;
-        background-color: #b46c20;
+        width: 40px;
+        height: 40px;
+        padding: 5px;
+        background-color: #997f5b;
+
     }
 }
 
