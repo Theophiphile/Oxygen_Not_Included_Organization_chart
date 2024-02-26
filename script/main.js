@@ -55,6 +55,21 @@ function initOverlaysStartArrows() {
             p.y = v[1];
             poly.points.appendItem(p);
         }
+        poly.onmousedown = function (event) {
+            if (event.offsetX < 15 ||
+                event.offsetX > 105 ||
+                event.offsetY < 15 ||
+                event.offsetY > 45) {
+                event.stopPropagation();
+                return false;
+            };
+        }
+        poly.onmouseenter = function (event) {
+            poly.style.fill = 'blue';
+        }
+        poly.onmouseleave = function (event) {
+            poly.style.fill = 'green';
+        }
     }
     for (value of [
         [[0, 0], [15, 15], [24, 15], [24, 0]],
@@ -76,18 +91,26 @@ function initOverlaysStartArrows() {
             p.y = v[1];
             poly.points.appendItem(p);
         }
+        poly.onmousedown = function (event) {
+            if (event.offsetX < 15 ||
+                event.offsetX > 105 ||
+                event.offsetY < 15 ||
+                event.offsetY > 45) {
+                event.stopPropagation();
+                return false;
+            };
+        }
+        poly.onmouseenter = function (event) {
+            poly.style.fill = 'blue';
+        }
+        poly.onmouseleave = function (event) {
+            poly.style.fill = 'green';
+        }
+
     }
     document.body.appendChild(svg);
     overlaysStartArrows = svg;
-    overlaysStartArrows.onmousedown = function (event) {
-        if (event.offsetX < 15 ||
-            event.offsetX > 105 ||
-            event.offsetY < 15 ||
-            event.offsetY > 45) {
-            event.stopPropagation(); 
-            return false;
-        };
-    }
+
 }
 
 function onMouseHoverStartArrows(c, event) {
@@ -131,7 +154,7 @@ function onmousedownForElementsList(figure, event, lookdb = true) {
     c.style.position = 'absolute';
     document.body.append(c);
     c.onmousedown = event => onmousedownGeneric(c, event);
-    
+
     offsetX = event.pageX - figure.getBoundingClientRect().left;
     offsetY = event.pageY - figure.getBoundingClientRect().top;
     onMouseMoveSnapGrid(c, offsetX, offsetY, event);
