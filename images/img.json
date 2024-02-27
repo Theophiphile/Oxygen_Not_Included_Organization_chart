@@ -1,41 +1,36 @@
-critters/:
-total 488
--rw-r--r-- 1 users  6697 24 févr. 22:11 abyss_bug.png
--rw-r--r-- 1 users  7775 24 févr. 22:11 azure_bug.png
--rw-r--r-- 1 users 10027 24 févr. 22:11 beeta.png
--rw-r--r-- 1 users  7328 24 févr. 22:11 coral_bug.png
--rw-r--r-- 1 users 13813 24 févr. 22:11 cuddle_pip.png
--rw-r--r-- 1 users 16676 24 févr. 22:11 delecta_vole.png
--rw-r--r-- 1 users 13749 24 févr. 22:11 dense_puft.png
--rw-r--r-- 1 users 15769 24 févr. 22:11 drecko.png
--rw-r--r-- 1 users 13897 24 févr. 22:11 gassy_moo.png
--rw-r--r-- 1 users 13477 24 févr. 22:11 glossy_drecko.png
--rw-r--r-- 1 users 21751 24 févr. 22:11 grubgrub.png
--rw-r--r-- 1 users  7255 24 févr. 22:11 gulp_fish.png
--rw-r--r-- 1 users 10092 24 févr. 22:11 hatch.png
--rw-r--r-- 1 users  6994 24 févr. 22:11 longhair_slicker.png
--rw-r--r-- 1 users  6489 24 févr. 22:11 molten_slicker.png
--rw-r--r-- 1 users  8058 24 févr. 22:11 morb.png
--rw-r--r-- 1 users 10382 24 févr. 22:11 oakshell.png
--rw-r--r-- 1 users  7092 24 févr. 22:11 pacu.png
--rw-r--r-- 1 users  8884 24 févr. 22:11 pacu_tropical.png
--rw-r--r-- 1 users 15775 24 févr. 22:11 pip.png
--rw-r--r-- 1 users  9982 24 févr. 22:11 plug_slug.png
--rw-r--r-- 1 users 11753 24 févr. 22:11 pokeshell.png
--rw-r--r-- 1 users 13285 24 févr. 22:11 puft.png
--rw-r--r-- 1 users 13218 24 févr. 22:11 puft_prince.png
--rw-r--r-- 1 users  7799 24 févr. 22:11 radiant_bug.png
--rw-r--r-- 1 users  7665 24 févr. 22:11 royal_bug.png
--rw-r--r-- 1 users 11969 24 févr. 22:11 sage_hatch.png
--rw-r--r-- 1 users 10402 24 févr. 22:11 sanishell.png
--rw-r--r-- 1 users  7543 24 févr. 22:11 shine_bug.png
--rw-r--r-- 1 users 15631 24 févr. 22:11 shove_vole.png
--rw-r--r-- 1 users  6072 24 févr. 22:11 slicker.png
--rw-r--r-- 1 users 19674 24 févr. 22:11 smog_plug.png
--rw-r--r-- 1 users 10358 24 févr. 22:11 smooth_hatch.png
--rw-r--r-- 1 users 16740 24 févr. 22:11 sponge_plug.png
--rw-r--r-- 1 users 14248 24 févr. 22:11 squeaku_puft.png
--rw-r--r-- 1 users 11521 24 févr. 22:11 stone_hatch.png
--rw-r--r-- 1 users  7589 24 févr. 22:11 sun_bug.png
--rw-r--r-- 1 users  6611 24 févr. 22:11 sun_nymph_egg.png
--rw-r--r-- 1 users 11650 24 févr. 22:11 sweetle.png
+"Algae Distiller": "algae_distiller",
+"Algae Terrarium": "algae_terrarium",
+"Ancient Specimen": "ancient_specimen",
+"Anti Entropy Thermo-Nullifier": "anti_entropy_thermo-nullifier",
+"Apothecary": "apothecary",
+"Biobot Builder": "biobot_builder",
+"Biobot": "biobot",
+"Blastshot Maker": "blastshot_maker",
+"Bleach Stone Hopper": "bleach_stone_hopper",
+"Crafting Station": "crafting_station",
+"Desalinator": "desalinator",
+"Diamond Press": "diamond_press",
+"Electric Grill": "electric_grill",
+"": "electrolyzer",
+"": "ethanol_distiller",
+"": "exosuit_forge",
+"": "fertilizer_synthesizer",
+"": "gas_range",
+"": "glass_forge",
+"": "hand_sanitizer",
+"": "hydrogen_generator",
+"": "kiln",
+"": "metal_refinery",
+"": "molecular_forge",
+"": "oil_refinery",
+"": "oil_well_cap",
+"": "ore_scrubber",
+"": "oxygen_diffuser",
+"": "oxylite_refinery",
+"": "petroleum_generator",
+"": "polymer_press",
+"": "rock_crusher",
+"": "rust-deoxidizer",
+"": "sludge_press",
+"": "sporechid",
+"": "wood_burner",

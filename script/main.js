@@ -1,6 +1,6 @@
 let DbList;
 
-function arrowClickButton() { 
+function arrowClickButton() {
     let butt = document.getElementById('buttonArrow');
     if (butt.style.backgroundColor == "") {
         butt.style.backgroundColor = 'green';
@@ -98,7 +98,7 @@ function initElementsList() {
         elementsList.appendChild(figure);
     }
     let crittersList = document.getElementById("CrittersList");
-   for (const [key, value] of Object.entries(img.critters)) {
+    for (const [key, value] of Object.entries(img.critters)) {
         let figure = document.createElement("div");
         figure.className = "critters";
         figure.id = key;
@@ -117,8 +117,15 @@ function initElementsList() {
     }
 }
 
+function HideAllListsBut(visible) {
+    for (hide of document.getElementsByClassName('ChoicesList')) 
+        hide.style.display = hide.id == visible ? 'flex' : 'none';
+}
+
+
 window.addEventListener('load', function () {
     initElementsList();
+    HideAllListsBut('ElementsList');
     DbList = document.createElement('div');
     DbList.style.width = '137px';
     DbList.style.overflow = 'scroll';
