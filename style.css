@@ -50,7 +50,6 @@ body {
     }
 }
 
-
 .dominoList {
     order: 0;
     overflow: auto;
@@ -61,6 +60,41 @@ body {
 #dessin {
     order: 1;
     flex: 1 0 auto;
+    background-color: #50554f;
+}
+
+.startArrow:hover {
+    background-color: rgb(48, 196, 12);
+}
+
+.startArrow::before {
+  content: '';
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 10px;
+  height: 12.5px;
+}
+
+#properties {
+    order: 99;
+    width: 100px;
+    margin: 0;
+    font-family: Helvetica;
+    text-align: center;
+    font-size: 20px;
+    background-color:#7a8c78; 
+    dt {
+        margin-top: 0;
+        font-size: 14px;
+        background-color:#71806e;
+    }
+
+    dd {
+        font-size: 12px;
+        text-align: center;
+        margin: 4px;
+    }
 }
 
 #buttonArrow {

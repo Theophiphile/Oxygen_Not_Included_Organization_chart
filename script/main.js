@@ -1,10 +1,55 @@
+let startArrow = document.createElement('div');
+startArrow.classList.add('startArrow');
+startArrow.style.border = '1px';
+startArrow.style.borderRadius = '50%';
+startArrow.style.position = 'absolute';
+startArrow.style.boxSizing = 'border-box';
+startArrow.style.width = '10px';
+startArrow.style.height = '10px';
+
+function drawArrowSnap(event, startx, starty) {
+    event.stopPropagation();
+}
+
 function arrowClickButton() {
     let butt = document.getElementById('buttonArrow');
-    if (butt.style.backgroundColor == "") {
-        butt.style.backgroundColor = 'green';
+    if (butt.style.backgroundColor == "rgb(99, 91, 102)") { // On
+        butt.style.backgroundColor = 'rgb(173, 159, 178)';
+        for (domino of document.getElementById('dessin').getElementsByClassName('domino')) {
+            for (i = 0; i <= 120; i += 10) {
+                let circle = startArrow.cloneNode(true);
+                circle.style.left = i - 5 + 'px';
+                circle.style.top = 0 - 5 + 'px';
+                circle.onclick = ((i) => (event) => drawArrowSnap(event, i, 0))(i); // Pfouuuuuuh, j'aime pas le curry a la sauce javascript
+                circle.onmousedown = circle.onclick;
+                domino.appendChild(circle);
+                circle = startArrow.cloneNode();
+                circle.style.left = i - 5 + 'px';
+                circle.style.top = 50 - 5 + 'px';
+                circle.onclick = ((i) => (event) => drawArrowSnap(event, i, 50))(i);
+                circle.onmousedown = circle.onclick;
+                domino.appendChild(circle);
+            }
+            for (i = 12.5; i <= 40; i += 12.5) {
+                let circle = startArrow.cloneNode(true);
+                circle.style.top = i - 5 + 'px';
+                circle.style.left = 0 - 5 + 'px';
+                circle.onclick = ((i) => (event) => drawArrowSnap(event, 0, i))(i);
+                circle.onmousedown = circle.onclick;
+                domino.appendChild(circle);
+                circle = startArrow.cloneNode();
+                circle.style.top = i - 5 + 'px';
+                circle.style.left = 120 - 5 + 'px';
+                circle.onclick = ((i) => (event) => drawArrowSnap(event, 120, i))(i);
+                circle.onmousedown = circle.onclick;
+                domino.appendChild(circle);
+            }
+            console.log(domino);
+        }
     }
-    else {
-        butt.style.backgroundColor = "";
+    else { // Off
+        document.querySelectorAll('.startArrow').forEach(e => e.remove());
+        butt.style.backgroundColor = "rgb(99, 91, 102)";
     }
 }
 
@@ -35,7 +80,7 @@ function onmousedownForElementsList(figure, event) {
     let c = figure.cloneNode(true);
     c.removeAttribute('id');
     c.style.position = 'absolute';
-    document.body.append(c);
+    document.getElementById('dessin').append(c);
     c.onmousedown = event => onmousedownGeneric(c, event);
 
     offsetX = event.pageX - figure.getBoundingClientRect().left;
@@ -51,11 +96,10 @@ function createMenu() {
     let styles = stylesheet.sheet;
     for (const [key, color] of Object.entries(img.colors)) {
         [r, g, b] = color.split(' ');
-        styles.insertRule('.' + key + 's{background-color:rgb(' + r * 1.7 + ',' + g * 1.7 + ',' + b * 1.7 + ');img{background-color:rgb(' + r * 1.3 + ',' + g * 1.3 + ',' + b * 1.3 + ')}}', styles.cssRules.length);
-        styles.insertRule('#' + key + 'sButton{background-color:rgb(' + r + ',' + g + ',' + b + ');}', styles.cssRules.length);
-        styles.insertRule('#' + key + 'sList{background-color:rgb(' + r + ',' + g + ',' + b + ');}', styles.cssRules.length);
-    }
-    console.log(styles);
+        styles.insertRule('.' + key + 's{background-color:rgb(' + [r, g, b].map(x => x * 1.7).join(',') + ');img{background-color:rgb(' + [r, g, b].map(x => x * 1.3).join(',') + ')}}', styles.cssRules.length);
+        styles.insertRule('#' + key + 'sButton{background-color:rgb(' + [r, g, b].join(',') + ');}', styles.cssRules.length);
+        styles.insertRule('#' + key + 'sList{background-color:rgb(' + [r, g, b].join(',') + ');}', styles.cssRules.length);
+    } // Beurk
     let menu = document.getElementById('leftMenu');
     let middle = document.getElementById('middle');
     for (const [str, entries] of Object.entries(img)) {
@@ -65,7 +109,6 @@ function createMenu() {
         let list = document.createElement("div");
         list.id = str + "List";
         list.classList.add('dominoList');
-        
         let butt = document.createElement("div");
         butt.classList.add('leftMenuButton')
         butt.id = str + 'Button';
