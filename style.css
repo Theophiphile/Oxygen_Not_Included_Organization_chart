@@ -25,7 +25,7 @@ body {
     /* Me demande pas pourquoi */
 }
 
-#leftchoices {
+#leftMenu {
     order: 0;
     display: flex;
     flex-direction: column;
@@ -44,19 +44,18 @@ body {
             padding: 2px;
         }
     }
+
+    .leftMenuButton:hover {
+        opacity: 0.8;
+    }
 }
 
-#ElementsList,
-#CrittersList {
+
+.dominoList {
     order: 0;
     overflow: auto;
-    background-color: #66553d;
     display: flex;
     flex-direction: column;
-}
-
-#CrittersList {
-    background-color: #663f3d;
 }
 
 #dessin {
@@ -68,35 +67,12 @@ body {
     box-sizing: border-box;
 }
 
-.elements4 {
-    border: 1px solid black;
-    box-sizing: border-box;
-    background-color: white;
-    padding: 0px;
-    margin: 5px;
-    width: 120px;
-    min-height: 60px;
-    display: flex;
-    align-items: center;
-    font-size: 12px;
-    color: black;
-    font-family: Helvetica;
-    text-align: center;
-    user-select: none;
-
-    img {
-        width: 50px;
-    }
-}
-
-.elements,
-.critters {
-    background-color: #b2946b;
+.domino {
     padding: 0px;
     margin: 5px;
     margin-bottom: 0px;
     width: 120px;
-    min-height: 50px;
+    height: 50px;
     display: flex;
     align-items: center;
     font-size: 12px;
@@ -111,58 +87,13 @@ body {
         width: 40px;
         height: 40px;
         padding: 5px;
-        background-color: #997f5b;
     }
 }
 
-.critters {
-    background-color: #b26d6a;
-
-    img {
-        background-color: #995e5b;
-    }
+.domino:hover {
+    opacity: 0.8;
 }
-
 
 .textElement {
     flex: 1;
-}
-
-.others {
-    border: 1px solid black;
-    padding: 5px;
-    margin: 0;
-    width: 120px;
-    height: 60px;
-    display: grid;
-    grid-template-columns: 50px 70px;
-    align-items: center;
-    font-size: 12px;
-    color: black;
-    font-family: Helvetica;
-    text-align: center;
-
-    img {
-        width: 50px;
-    }
-}
-
-.buildings {
-    border: 1px dashed black;
-    background-color: #6666ff16;
-    padding: 5px;
-    margin: 0;
-    width: 120px;
-    height: 60px;
-    display: grid;
-    grid-template-columns: 50px 70px;
-    align-items: center;
-    font-size: 12px;
-    color: black;
-    font-family: Helvetica;
-    text-align: center;
-
-    img {
-        width: 50px;
-    }
 }
