@@ -1,6 +1,3 @@
-let DbList;
-
-
 function arrowClickButton() {
     let butt = document.getElementById('buttonArrow');
     if (butt.style.backgroundColor == "") {
@@ -11,46 +8,14 @@ function arrowClickButton() {
     }
 }
 
-function lookInDb(key) {
-    return;
-    var ret = [];
-    if ('High' in db.elements[key]) {
-        ret.push(...Object.keys(db.elements[key].High.elements));
-    }
-    if ('Low' in db.elements[key]) {
-        ret.push(...Object.keys(db.elements[key].Low.elements));
-    }
-    for (const [k, v] of Object.entries(db.elements)) {
-        if ('High' in v && key in v.High.elements) {
-            ret.push(k);
-        }
-        if ('Low' in v && key in v.Low.elements) {
-            ret.push(k);
-        }
-    }
-    console.log([...new Set(ret)]);
-    while (DbList.firstChild) {
-        DbList.firstChild.remove();
-    }
-    for (const e of [...new Set(ret)]) {
-        let elem = document.getElementById(e).cloneNode(true);
-        elem.removeAttribute('id');
-        elem.onmousedown = event => onmousedownForElementsList(elem, event, false);
-        DbList.insertAdjacentElement("beforeend", elem);
-    }
-}
-
 function onMouseMoveSnapGrid(c, offsetX, offsetY, event) {
     c.style.left = ((event.pageX - offsetX) / 20).toFixed() * 20 + 'px';
     c.style.top = ((event.pageY - offsetY) / 20).toFixed() * 20 + 'px';
 }
 
-function onmousedownGeneric(c, event, lookdb = true) {
+function onmousedownGeneric(c, event) {
     offsetX = event.pageX - c.getBoundingClientRect().left;
     offsetY = event.pageY - c.getBoundingClientRect().top;
-    if (lookdb) {
-        lookInDb(c.getAttribute("element"));
-    }
     omm = event => onMouseMoveSnapGrid(c, offsetX, offsetY, event);
     omm(event);
     document.addEventListener('mousemove', omm);
@@ -63,7 +28,7 @@ function onmousedownGeneric(c, event, lookdb = true) {
     };
 }
 
-function onmousedownForElementsList(figure, event, lookdb = true) {
+function onmousedownForElementsList(figure, event) {
     if (event.button > 0) {
         return;
     }
@@ -76,7 +41,7 @@ function onmousedownForElementsList(figure, event, lookdb = true) {
     offsetX = event.pageX - figure.getBoundingClientRect().left;
     offsetY = event.pageY - figure.getBoundingClientRect().top;
     onMouseMoveSnapGrid(c, offsetX, offsetY, event);
-    onmousedownGeneric(c, event, lookdb);
+    onmousedownGeneric(c, event);
 }
 
 function createMenu() {
@@ -135,14 +100,7 @@ function HideAllListsBut(visible) {
         hide.style.display = hide.id == visible ? 'flex' : 'none';
 }
 
-
 window.addEventListener('load', function () {
     createMenu();
-    HideAllListsBut('ElementsList');
-    DbList = document.createElement('div');
-    DbList.style.width = '137px';
-    DbList.style.overflow = 'scroll';
-    DbList.style.left = window.innerWidth - 140 + 'px';
-    DbList.style.top = 0;
-    document.body.appendChild(DbList);
+    HideAllListsBut('elementsList');
 });
