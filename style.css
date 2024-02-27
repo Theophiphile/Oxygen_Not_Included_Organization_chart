@@ -37,12 +37,10 @@ body {
         flex-direction: column;
         img,
         svg {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
+            object-fit: contain;
             width: 40px;
             height: 40px;
-            object-fit: contain;
+            padding: 2px;
         }
     }
 }
@@ -55,6 +53,14 @@ body {
     flex-direction: column;
 }
 
+#CrittersList {
+    order: 0;
+    overflow: auto;
+    background-color: #663f3d;
+    display: flex;
+    flex-direction: column;
+}
+
 #dessin {
     order: 1;
     flex: 1 0 auto;
@@ -62,26 +68,6 @@ body {
 
 #buttonArrow {
     box-sizing: border-box;
-}
-
-.critters {
-    border: 1px dashed black;
-    background-color: #FFCC9948;
-    padding: 5px;
-    margin: 0;
-    width: 120px;
-    height: 60px;
-    display: grid;
-    grid-template-columns: 50px 70px;
-    align-items: center;
-    font-size: 12px;
-    color: black;
-    font-family: Helvetica;
-    text-align: center;
-
-    img {
-        width: 50px;
-    }
 }
 
 .elements4 {
@@ -129,6 +115,33 @@ body {
 
     }
 }
+
+
+.critters {
+    background-color: #b26d6a;
+    padding: 0px;
+    margin: 5px;
+    margin-bottom: 0px;
+    width: 120px;
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    color: black;
+    font-family: Helvetica;
+    text-align: center;
+    user-select: none;
+    box-shadow: 1px 3px 3px rgba(0, 0, 0, 0.5);
+    img {
+        object-fit: contain;
+        width: 40px;
+        height: 40px;
+        padding: 5px;
+        background-color: #995e5b;
+
+    }
+}
+
 
 .textElement {
     flex: 1;

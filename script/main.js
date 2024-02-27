@@ -79,17 +79,15 @@ function onmousedownForElementsList(figure, event, lookdb = true) {
 }
 
 function initElementsList() {
-    let elementsList = document.createElement('div');
-    elementsList.id = "ElementsList";
-
-    for (const [key, value] of Object.entries(db.elements)) {
+    let elementsList = document.getElementById("ElementsList");
+    for (const [key, value] of Object.entries(img.elements)) {
         let figure = document.createElement("div");
         figure.className = "elements";
         figure.id = key;
         figure.setAttribute("element", key);
         figure.onmousedown = event => onmousedownForElementsList(figure, event);
         let image = document.createElement('img');
-        image.setAttribute('src', 'images/elements/' + img.elements[key] + '.png');
+        image.setAttribute('src', 'images/elements/' + value + '.png');
         image.draggable = false;
         let caption = document.createElement("div");
         caption.className = "textElement";
@@ -99,7 +97,24 @@ function initElementsList() {
         console.log(figure);
         elementsList.appendChild(figure);
     }
-    document.getElementById('middle').appendChild(elementsList);
+    let crittersList = document.getElementById("CrittersList");
+   for (const [key, value] of Object.entries(img.critters)) {
+        let figure = document.createElement("div");
+        figure.className = "critters";
+        figure.id = key;
+        figure.setAttribute("critter", key);
+        figure.onmousedown = event => onmousedownForElementsList(figure, event);
+        let image = document.createElement('img');
+        image.setAttribute('src', 'images/critters/' + value + '.png');
+        image.draggable = false;
+        let caption = document.createElement("div");
+        caption.className = "textElement";
+        caption.appendChild(document.createTextNode(key));
+        figure.appendChild(image);
+        figure.appendChild(caption);
+        console.log(figure);
+        crittersList.appendChild(figure);
+    }
 }
 
 window.addEventListener('load', function () {

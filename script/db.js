@@ -1,4 +1,7 @@
 db = {
+    "critters" : {
+
+    },
     "elements": {
 "Abyssalite" : {"High": {"value": 3421.85, "elements": {"Molten Tungsten": 100}}},				
 "Algae" : {"High": {"value": 125.00, "elements": {"Dirt": 100}}},				
